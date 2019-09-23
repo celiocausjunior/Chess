@@ -71,12 +71,15 @@ public class ChessMatch {
 		validateSourcePosition(source);
 		validateTargetPosition(source, target);
 		Piece capturedPiece = makeMove(source, target);
+		
 		if (testCheck(currentPlayer)) {
 			undoMove(source, target, capturedPiece);
 			throw new ChessException("You can not put yourself in check ");
 		}
+		
 		check = (testCheck(opponent(currentPlayer))) ? true : false;
-		if (testCheck(opponent(currentPlayer))) {
+		
+		if (testCheckMate(opponent(currentPlayer))) {
 			checkMate = true;
 		} else {
 			nextTurn();
